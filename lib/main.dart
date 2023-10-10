@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/services/jornal_service.dart';
 import 'screens/home_screen/home_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +24,6 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        textTheme: GoogleFonts.bitterTextTheme(),
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
