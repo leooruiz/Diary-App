@@ -6,7 +6,7 @@ void main() {
   runApp(const MyApp());
   JournalService service = JournalService();
   service.register("Olá mundo!");
-  service.get();
+  // service.get();
 }
 
 class MyApp extends StatelessWidget {
