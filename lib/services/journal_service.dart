@@ -6,8 +6,9 @@ class JournalService {
   static const String url = "http://192.168.15.15:3000/";
   static const String resource = "learnhttp/";
 
-  http.Client client =
-      InterceptedClient.build(interceptors: [LoggingInterceptor()]); //passamos um client para o http, para assim ter o acesso aos interceptadores quando uma requisição ou resposta for feita no servidor.
+  http.Client client = InterceptedClient.build(interceptors: [
+    LoggingInterceptor()
+  ]); //passamos um client para o http, para assim ter o acesso aos interceptadores quando uma requisição ou resposta for feita no servidor.
 
   String getUrl() {
     return "$url$resource";
