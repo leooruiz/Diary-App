@@ -99,7 +99,7 @@ class JournalCard extends StatelessWidget {
   callAddJournalScreen(BuildContext context) {
     Navigator.pushNamed(context, 'add-journal',
         arguments: Journal(
-            id: Uuid().v1(),
+            id: const Uuid().v1(),
             content: "",
             createdAt: showedDate,
             updatedAt: showedDate));
