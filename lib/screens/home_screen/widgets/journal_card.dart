@@ -6,7 +6,12 @@ import 'package:uuid/uuid.dart';
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
-  const JournalCard({Key? key, this.journal, required this.showedDate})
+  final Function refreshFunction;
+  const JournalCard(
+      {Key? key,
+      this.journal,
+      required this.showedDate,
+      required this.refreshFunction})
       : super(key: key);
 
   @override
@@ -78,10 +83,12 @@ class JournalCard extends StatelessWidget {
           ),
         ),
       );
-    } else { //caso o card não estiver preenchido irá retornar essas informações:
+    } else {
+      //caso o card não estiver preenchido irá retornar essas informações:
       return InkWell(
         onTap: () {
-          callAddJournalScreen(context); //caso clicada, executará a função de navegação nomeada
+          callAddJournalScreen(
+              context); //caso clicada, executará a função de navegação nomeada
         },
         child: Container(
           height: 115,
@@ -98,10 +105,26 @@ class JournalCard extends StatelessWidget {
 
   callAddJournalScreen(BuildContext context) {
     Navigator.pushNamed(context, 'add-journal',
-        arguments: Journal(
-            id: const Uuid().v1(),
-            content: "",
-            createdAt: showedDate,
-            updatedAt: showedDate));
+            arguments: Journal(
+                id: const Uuid().v1(),
+                content: "",
+                createdAt: showedDate,
+                updatedAt: showedDate))
+        .then((value) {
+      refreshFunction();
+      // o valor passado pelo navigator.pop do registro é utilizado aqui
+      if (value != null && value == true) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Registro criado com sucesso."),
+          ),
+        );
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Houve uma falha ao registrar."),
+        ),
+      );
+    });
   }
 }
