@@ -1,1 +1,1 @@
-async_Study(){}
+asyncStudy() {}
