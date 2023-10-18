@@ -19,8 +19,7 @@ class AddJournalScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                registerJournal();
-                Navigator.pop(context);
+                registerJournal(context);
               },
               icon: const Icon(Icons.check))
         ],
@@ -39,11 +38,12 @@ class AddJournalScreen extends StatelessWidget {
     );
   }
 
-  registerJournal() {
+  registerJournal(context) async {
     String content = _contentController.text;
     journal.content =
         content; //atualiza o valor de journal que era vazio, agora passa a ter um valor
     JournalService service = JournalService();
-    service.register(journal);
+    bool result = await service.register(journal);
+    Navigator.pop(context, result); //é possível enviar um argumento pelo Navigator, que pode ser usado por quem chamou a tela, que neste caso é o journal_card
   }
 }
