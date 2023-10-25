@@ -1,61 +1,28 @@
 {
-  "learnhttp": {
-    "content": "Olá Mundo!"
-  },
+  "users": [
+    {
+      "email": "minepvz@gmail.com",
+      "password": "$2a$10$2D8uocb6doZxptqVtP0cL.DiK/UJzowqxWgkpHOSePs2inhCLISWq",
+      "id": 1
+    },
+    {
+      "email": "minepvz1@gmail.com",
+      "password": "$2a$10$M7joeSD34LrmPUjwZTexROPMWgLU/tiSf.rlihrotUZJKPNq0fPL2",
+      "id": 2
+    },
+    {
+      "email": "leoruizz14@outlook.com",
+      "password": "$2a$10$Q3FLh6WBBwFPBis6eZ1CkOWfMBlXsxlmqFH6PoEocfChjToYG180.",
+      "id": 3
+    }
+  ],
   "journals": [
     {
-      "id": "ca9bb570-6de3-11ee-9e86-5f7cbb0cd2a3",
-      "content": "Hoje foi um dia incrível",
-      "created_at": "2023-10-18 18:26:01.930525",
-      "updated_at": "2023-10-18 18:26:01.930533"
-    },
-    {
-      "id": "61ad5b70-6dea-11ee-bf50-73baa8d7f8da",
-      "content": "Amo estudar Flutter",
-      "created_at": "2023-10-18 19:13:12.363158",
-      "updated_at": "2023-10-18 19:13:12.363169"
-    },
-    {
-      "id": "73216300-6dff-11ee-8008-9b41b7ee650f",
-      "content": "",
-      "created_at": "2023-10-18 21:44:01.075595",
-      "updated_at": "2023-10-18 21:44:01.075605"
-    },
-    {
-      "id": "7c80adc0-6dff-11ee-b7de-5f6550663bbd",
-      "content": "dasdasd",
-      "created_at": "2023-10-09 21:44:10.363890",
-      "updated_at": "2023-10-09 21:44:10.363890"
-    },
-    {
-      "id": "3de69100-6e00-11ee-845f-2f3652c344f7",
-      "content": "ererer",
-      "created_at": "2023-10-09 21:49:38.544224",
-      "updated_at": "2023-10-09 21:49:38.544224"
-    },
-    {
-      "id": "7df580f0-6ea3-11ee-89ee-777ce6ed31d9",
-      "content": "Hoje o dia está lindo!",
-      "created_at": "2023-10-11 17:11:27.484981",
-      "updated_at": "2023-10-11 17:11:27.484981"
-    },
-    {
-      "id": "b21e2a30-6ea3-11ee-a8ae-4dd32daba129",
-      "content": "fasdasdawsd",
-      "created_at": "2023-10-12 17:19:41.729341",
-      "updated_at": "2023-10-12 17:19:41.729341"
-    },
-    {
-      "id": "853d19d0-6ea4-11ee-a8ae-4dd32daba129",
-      "content": "Aprendendo com Biel!",
-      "created_at": "2023-10-13 17:19:41.729341",
-      "updated_at": "2023-10-13 17:19:41.729341"
-    },
-    {
-      "id": "48025ea0-6ea8-11ee-a6ad-e7724fad3051",
-      "content": "Legal, hoje eu terminei o curso de flutter web API",
-      "created_at": "2023-10-19 17:52:28.268001",
-      "updated_at": "2023-10-19 17:52:28.268001"
+      "id": "b5986750-71d9-11ee-90b2-c101e9f7dc0f",
+      "content": "I love flutter!",
+      "created_at": "2023-10-18 19:18:25.243649",
+      "updated_at": "2023-10-18 19:18:25.243649",
+      "userId": 1
     }
   ]
 }
