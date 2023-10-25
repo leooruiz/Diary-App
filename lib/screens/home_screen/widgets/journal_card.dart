@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
+import 'package:flutter_webapi_first_course/screens/commom/confirmation_dialog.dart';
+import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'package:uuid/uuid.dart';
 
 class JournalCard extends StatelessWidget {
@@ -18,7 +20,9 @@ class JournalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (journal != null) {
       return InkWell(
-        onTap: () {},
+        onTap: () {
+          callAddJournalScreen(context, journal: journal);
+        },
         child: Container(
           height: 115,
           margin: const EdgeInsets.all(8),
@@ -79,6 +83,14 @@ class JournalCard extends StatelessWidget {
                   ),
                 ),
               ),
+              IconButton(
+                  onPressed: () {
+                    removeJournal(context);
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Color.fromARGB(224, 160, 11, 0),
+                  )),
             ],
           ),
         ),
@@ -103,28 +115,81 @@ class JournalCard extends StatelessWidget {
     }
   }
 
-  callAddJournalScreen(BuildContext context) {
-    Navigator.pushNamed(context, 'add-journal',
-            arguments: Journal(
-                id: const Uuid().v1(),
-                content: "",
-                createdAt: showedDate,
-                updatedAt: showedDate))
-        .then((value) {
+  callAddJournalScreen(BuildContext context, {Journal? journal}) {
+    Journal innerJournal = Journal(
+        id: const Uuid().v1(),
+        content: "",
+        createdAt: showedDate,
+        updatedAt: showedDate);
+    Map<String, dynamic> map = {};
+
+    if (journal != null) {
+      innerJournal = journal;
+      map['is_editing'] = false; //caso o journal não for nulo, criaremos
+    } else {
+      map['is_editing'] = true; //caso for nulo, editaremos
+    }
+
+    map['journal'] = innerJournal;
+
+    Navigator.pushNamed(
+      context,
+      'add-journal',
+      arguments: map,
+    ).then((value) {
       refreshFunction();
       // o valor passado pelo navigator.pop do registro é utilizado aqui
-      if (value != null && value == true) {
-        ScaffoldMessenger.of(context).showSnackBar(
+      try {
+        if (value != null && value == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Registro criado com sucesso."),
+            ),
+          );
+        } else if (value == false || value == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Nada foi registrado."),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Algo deu errado."),
+            ),
+          );
+        }
+      } on Exception {
+        return ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Registro criado com sucesso."),
+            content: Text("Houve uma falha no registro."),
           ),
         );
-      } else{
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Houve uma falha ao registrar."),
-        ),
-      );}
+      }
     });
+  }
+
+  removeJournal(context) {
+    JournalService service = JournalService();
+    if (journal != null) {
+      showConfirmationDialog(
+        context,
+        content:
+            "Deseja realmente remover o diário do dia ${WeekDay(journal!.createdAt)}?",
+        affirmativeOption: "Remover",
+      ).then((value) {
+        if (value != null) {
+          if (value) {
+            service.deleteJournal(journal!.id).then((value) {
+              refreshFunction();
+              if (value) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("O registro foi deletado com sucesso!")));
+              }
+            });
+          }
+        }
+      });
+    }
   }
 }
