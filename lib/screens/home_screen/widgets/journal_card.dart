@@ -1,20 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_webapi_first_course/helpers/logout.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:flutter_webapi_first_course/screens/commom/confirmation_dialog.dart';
+import 'package:flutter_webapi_first_course/screens/commom/exception_dialog.dart';
 import 'package:flutter_webapi_first_course/services/journal_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
   final Function refreshFunction;
-  const JournalCard(
-      {Key? key,
-      this.journal,
-      required this.showedDate,
-      required this.refreshFunction})
-      : super(key: key);
+  final int userId;
+  const JournalCard({
+    Key? key,
+    this.journal,
+    required this.showedDate,
+    required this.refreshFunction,
+    required this.userId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +127,9 @@ class JournalCard extends StatelessWidget {
         id: const Uuid().v1(),
         content: "",
         createdAt: showedDate,
-        updatedAt: showedDate);
+        updatedAt: showedDate,
+        userId: userId);
+
     Map<String, dynamic> map = {};
 
     if (journal != null) {
@@ -180,13 +189,29 @@ class JournalCard extends StatelessWidget {
       ).then((value) {
         if (value != null) {
           if (value) {
-            service.deleteJournal(journal!.id).then((value) {
-              refreshFunction();
-              if (value) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("O registro foi deletado com sucesso!")));
-              }
-            });
+            SharedPreferences.getInstance().then(
+              (prefs) {
+                String? token = prefs.getString("accessToken");
+                if (token != null) {
+                  service.deleteJournal(journal!.id, token).then(
+                    (value) {
+                      refreshFunction();
+                    },
+                  ).catchError((error) {
+                    logout(context);
+                  },
+                      test: (error) =>
+                          error is TokenNotValidException).catchError((error) {
+                    var innerError = error as HttpException;
+                    showExceptionDialog(context, content: innerError.message);
+                  }, test: (error) => error is HttpException);
+                }
+                if (value) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("O registro foi deletado com sucesso!")));
+                }
+              },
+            );
           }
         }
       });
