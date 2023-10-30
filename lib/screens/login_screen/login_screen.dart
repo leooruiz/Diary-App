@@ -1,11 +1,16 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/screens/commom/confirmation_dialog.dart';
+import 'package:flutter_webapi_first_course/screens/commom/exception_dialog.dart';
 import 'package:flutter_webapi_first_course/services/auth_service.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
   final AuthService service = AuthService();
@@ -72,29 +77,43 @@ class LoginScreen extends StatelessWidget {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    try {
-      service.login(email: email, password: password).then((resultLogin) {
+    service.login(email: email, password: password).then(
+      (resultLogin) async {
         if (resultLogin) {
           Navigator.pushReplacementNamed(context, 'home');
         }
-      });
-    } on UserNotFoundException {
-      showConfirmationDialog(context,
-              affirmativeOption: "CADASTRAR",
-              cancel: "CANCELAR",
-              content:
-                  "Usuário não encontrado, deseja criar um novo usuário usando o e-mail '$email' e a senha inserida?")
-          .then((value) {
-        if (value != null && value) {
-          service
-              .register(email: email, password: password)
-              .then((resultRegister) {
-            if (resultRegister) {
-              Navigator.pushReplacementNamed(context, 'home');
-            }
-          });
-        }
-      });
-    }
+      },
+    ).catchError(
+      (error) {
+        var innerError = error as HttpException;
+        showExceptionDialog(context, content: innerError.message);
+      },
+      test: (error) => error is HttpException,
+    ).catchError(
+      (error) {
+        showConfirmationDialog(context,
+                affirmativeOption: "CADASTRAR",
+                cancel: "CANCELAR",
+                content:
+                    "Usuário não encontrado, deseja criar um novo usuário usando o e-mail '$email' e a senha inserida?")
+            .then((value) {
+          if (value != null && value) {
+            service
+                .register(email: email, password: password)
+                .then((resultRegister) {
+              if (resultRegister) {
+                Navigator.pushReplacementNamed(context, 'home');
+              }
+            });
+          }
+        });
+      },
+      test: (error) => error is UserNotFoundException,
+    ).catchError((error) {
+      showExceptionDialog(context,
+          content:
+              "O servidor demorou para responder, tente novamente mais tarde.");
+      error as TimeoutException;
+    }, test: (error) => error is TimeoutException);
   }
 }
