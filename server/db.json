@@ -14,15 +14,79 @@
       "email": "leoruizz14@outlook.com",
       "password": "$2a$10$Q3FLh6WBBwFPBis6eZ1CkOWfMBlXsxlmqFH6PoEocfChjToYG180.",
       "id": 3
+    },
+    {
+      "email": "leonardo@gmail.com",
+      "password": "$2a$10$TtnMiSvCOoM/TxJZ.9EFvu1kopoE.h/Z3TzE.sldRbUCOFR8gKRIa",
+      "id": 4
+    },
+    {
+      "email": "leonardo123@gmail.com",
+      "password": "$2a$10$NwB.Le8MaKdJZz4FaBxMkehTq1S6q1wAVR8bVWU8Td84GFVeiMPLC",
+      "id": 5
+    },
+    {
+      "email": "leoruiz14@outlook.com",
+      "password": "$2a$10$LB52t8d8wNgNX8woIYQjaOzKxDAI318EZ9FgX.9q0DrxPX4pMmZ0q",
+      "id": 6
     }
   ],
   "journals": [
     {
       "id": "b5986750-71d9-11ee-90b2-c101e9f7dc0f",
       "content": "I love flutter!",
-      "created_at": "2023-10-18 19:18:25.243649",
-      "updated_at": "2023-10-18 19:18:25.243649",
+      "created_at": "2023-10-25 19:18:25.243649",
+      "updated_at": "2023-10-25 19:18:25.243649",
       "userId": 1
+    },
+    {
+      "id": "6c95ae80-743d-11ee-b456-3955ed695d7d",
+      "content": "Today is a Nice day!",
+      "created_at": "2023-10-28 20:22:17.584441",
+      "updated_at": "2023-10-30 17:26:38.314729",
+      "userId": 1
+    },
+    {
+      "id": "02c0bdb0-7447-11ee-abc8-8f00393dc0af",
+      "content": "minepvz1 criou!",
+      "created_at": "2023-10-21 21:30:50.320557",
+      "updated_at": "2023-10-21 21:30:50.320557",
+      "userId": 2
+    },
+    {
+      "id": "2a5d9460-7447-11ee-ae1f-1bb8e9f3fc32",
+      "content": "minepvz criou!",
+      "created_at": "2023-10-20 21:32:25.653918",
+      "updated_at": "2023-10-20 21:32:25.653918",
+      "userId": 1
+    },
+    {
+      "id": "39627d40-7447-11ee-ae1f-1bb8e9f3fc32",
+      "content": "leoruizz14 criou!",
+      "created_at": "2023-10-18 21:32:51.404234",
+      "updated_at": "2023-10-18 21:32:51.404234",
+      "userId": 3
+    },
+    {
+      "id": "40459440-7743-11ee-a264-9d7ef4b47b48",
+      "content": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem loremlorem lorem lorem lorem lorem lorem",
+      "created_at": "2023-10-21 16:42:00.298216",
+      "updated_at": "2023-10-21 16:42:00.298216",
+      "userId": 1
+    },
+    {
+      "id": "118b6c30-7746-11ee-b6bb-5dd67bbfe3cf",
+      "content": "sábado é bom demais!",
+      "created_at": "2023-10-21 17:02:09.731088",
+      "updated_at": "2023-10-21 17:02:09.731088",
+      "userId": 1
+    },
+    {
+      "id": "656c7500-775b-11ee-99a4-299c2a77e829",
+      "content": "Esta terça feira está incrível!",
+      "created_at": "2023-10-24 19:34:45.282248",
+      "updated_at": "2023-10-24 19:34:45.282248",
+      "userId": 3
     }
   ]
 }
