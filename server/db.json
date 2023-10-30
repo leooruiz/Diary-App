@@ -1,4 +1,32 @@
 {
-  "users": [],
-  "journals": []
+  "users": [
+    {
+      "email": "admin@email.com",
+      "password": "$2a$10$10IacSP4vPPkNS5gYJ0zgOjgdiyRleeEx9jdaL5ACFa/7U2E11Pei",
+      "id": 1
+    }
+  ],
+  "journals": [
+    {
+      "id": "11310340-775e-11ee-803d-47dc3502286e",
+      "content": "What a nice day!",
+      "created_at": "2023-10-30 19:53:53.978238",
+      "updated_at": "2023-10-30 19:53:53.978238",
+      "userId": 1
+    },
+    {
+      "id": "18c244c0-775e-11ee-803d-47dc3502286e",
+      "content": "TGIF!",
+      "created_at": "2023-10-27 19:53:53.978238",
+      "updated_at": "2023-10-27 19:53:53.978238",
+      "userId": 1
+    },
+    {
+      "id": "2bb2bfb0-775e-11ee-803d-47dc3502286e",
+      "content": "TACO TUUUUESDAY!",
+      "created_at": "2023-10-24 19:53:53.978238",
+      "updated_at": "2023-10-24 19:53:53.978238",
+      "userId": 1
+    }
+  ]
 }
